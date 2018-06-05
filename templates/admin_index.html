@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %}  Yönetici Arayüzü {% endblock %}
+
+{% block delete_confirm %}
+        <script type="text/javascript">
+         
+            function getConfirmation(){
+               var retVal = confirm("Silmek istediğinizden emin misiniz?");
+                if(retVal) return true;
+                else return false;
+            }
+         //-->
+      </script>
+    {% endblock %}
+{% block search %}
+{% endblock %}
+{% block nav %}
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Filo</a></li>
+        <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Sipariş</a></li>
+        <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Mesajlar</a></li>
+          <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Araç Ekle</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Çıkış Yap</a></li>
+      </ul>
+    </div>
+
+{% endblock %}
+{% block body %}
+<div class='container table-responsive'>
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h5><strong><span class="glyphicon glyphicon-list"></span> Tüm Araçlar</strong></h5> </div>
+    <div class="panel-body">
+  <strong class="navbar-form navbar-left" style="color: #5f5f5f;"><span class="glyphicon glyphicon-cog"></span> Sayfa başına 25 araç </strong>
+
+   <!-- search box-->
+
+      <form method="GET" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Model Ara" value="{{request.GET.q}}" name="q">
+        </div>
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Ara</button>
+      </form>
+
+  <!-- Table -->
+
+  <table class="table table-bordered table-striped table-hover">
+
+   <tr>
+    <td><strong>Araç Modeli</strong></td>
+    <td><strong>Teslimat Yeri</strong></td>
+    <td><strong>Koltuk Sayısı</strong></td>
+    <td><strong>Günlük Ücret</strong></td>
+    <td><strong>Beğeni</strong></td>
+    <td><strong>Ayarlar</strong></td>
+  </tr>
+
+      <tbody>
+      {% for ob in car %}
+
+    <tr>
+    <td>{{ob.car_name}}</td>
+    <td>{{ob.company_name}}</td>
+    <td>{{ob.num_of_seats}}</td>
+    <td>{{ob.cost_par_day}}</td>
+    <td>{{ob.like}}</td>
+
+    <td>
+
+         <a href="{% url 'car_detail' ob.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+         <a href="{% url 'car_edit' ob.id %}"><button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button></a>
+         <a href="{% url 'car_delete' ob.id %}"><button type="button" class="btn btn-danger" onclick="return getConfirmation()"><span class="glyphicon glyphicon-trash"></span></button></a>
+
+    </td>
+    </tr>
+    {% endfor %}
+</tbody>
+  </table>
+
+<nav>
+  <ul class="pager">
+    <li class="previous">{% if car.has_previous %}
+            <a href="?page={{ movie.previous_page_number }}" style="background-color:#1aa3ff !important; color: white !important;"><span aria-hidden="true">&larr;</span> Geri</a>
+    {% endif %}
+    </li>
+      <li class="previous" style="color: black !important;">
+          Page {{ car.number }} of {{ car.paginator.num_pages }}.
+
+    </li>
+    <li class="next">{% if car.has_next %}
+            <a href="?page={{ movie.next_page_number }}" style="background-color:#1aa3ff !important; color: white !important;">
+        İleri <span aria-hidden="true">&rarr;</span></a>{% endif %}</li>
+  </ul>
+</nav>
+        <hr>
+
+</div>
+
+</div>
+
+
+
+</div> <!--end container-->
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Kiralama Detayları {% endblock %}
+
+{% block body %}
+
+
+<div class ='col-sm-6 col-sm-offset-3'>
+  <strong><p style="color: red">Araç seçme işleminiz başarıyla gerçekleşti.Aracı teslim etmek için sizinle iletişime geçeceğiz.Diğer kiralama detayları aşağıdadır.
+  </p></strong>
+  <p class="list-group-item active">
+    <strong><span class="glyphicon glyphicon-tag"></span>Araç Kiralama Detayları</strong>
+  </p>
+   <a href="" class="list-group-item"><strong>Araç Modeli: </strong>{{detail.car_name}}</a>
+  <a href="" class="list-group-item"><strong>Kiralayanın Adı Soyadı: </strong>{{detail.employee_name}}</a>
+  <a href="" class="list-group-item"><strong>Tel No: </strong>{{detail.cell_no}}</a>
+  <a href="" class="list-group-item"><strong>Adres: </strong>{{detail.address}}</a>
+  <a href="" class="list-group-item"><strong>Araç Alış Tarihi: </strong>{{detail.date}}</a>
+  <a href="" class="list-group-item"><strong>Araç Teslim Tarihi: </strong>{{detail.to}}</a>
+  <a href="" class="list-group-item"><strong>Sipariş No: </strong>{{detail.id}}</a><br>
+  <div class="pull-right">
+    <a href="{% url 'order_edit' detail.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Kiralamayı Düzenle</button></a>
+    <a href="{% url 'order_delete' detail.id %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-pencil"></span> Kiralamayı İptal Et</button></a>
+    <a href=""><button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Yazdır</button></a>
+
+  </div>
+</div>
+
+{% endblock %}

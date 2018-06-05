@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} {{detail.car_name}} Özellikleri {% endblock %}
+
+{% block body %}
+
+{% block search %}
+{% endblock %}
+
+
+
+<div class ='col-sm-6 col-sm-offset-3'>
+  <div class="list-group-item active">
+    <strong><span class="glyphicon glyphicon-film"></span> Araç Özellikleri</strong>
+  </div>
+  {% if detail.image %}
+  <img src='{{ detail.image.url }}' class="img-responsive"/>
+  {% endif %}
+  <a href="" class="list-group-item"><strong>Araç Modeli   : </strong>{{detail.car_name}}</a>
+  <a href="" class="list-group-item"><strong>Alış Yeri     : </strong>{{detail.company_name}}</a>
+  <a href="" class="list-group-item"><strong>Koltuk Sayısı : </strong>{{detail.num_of_seats}}</a>
+  <a href="" class="list-group-item"><strong>Günlük Ücret  : </strong>{{detail.cost_par_day}}</a>
+  <a href="" class="list-group-item"><strong>Beğeni        : </strong>{{detail.like}}</a>
+  <a href="" class="list-group-item"><strong>Detaylar      : </strong>{{detail.content}}</a><br>
+  <div class="pull-right">
+    <a href="{% url 'newcar' %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-list"></span> Yeni Eklenen Araçlar</button></a>
+    <a href="{% url 'order_create' %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Kirala</button></a>
+    
+<hr>
+  </div>
+
+</div>
+
+{% endblock %}

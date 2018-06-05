@@ -1,0 +1,88 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} Aslanlar Araç Kiralama {% endblock %}</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+      .navbar {
+          margin-bottom: 0;
+          background-color:#b30000;
+          z-index: 9999;
+          border: 0;
+          font-size: 12px !important;
+          line-height: 1.42857143 !important;
+          border-radius: 0;
+          font-family: Montserrat, sans-serif;
+      }
+      .navbar li a, .navbar .navbar-brand {
+          color: #fff !important;
+      }
+      .navbar-nav li a:hover, .navbar-nav li.active a {
+          color: #f4511e !important;
+          background-color: #fff !important;
+      }
+      .navbar-default .navbar-toggle {
+          border-color: transparent;
+          color: #fff !important;
+      }
+      </style>
+<body>
+
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="glyphicon glyphicon-align-justify"></span>
+
+      </button>
+      <div class="navbar-brand"><span class="glyphicon glyphicon-fire"></span> Aslanlar Araç Kiralama</div>
+
+
+    </div>
+
+      <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+         <li>
+             {% block search %}
+            <!-- search box-->
+
+      <form method="GET" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Model Ara" value="{{request.GET.q}}" name="q">
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Ara</button>
+      </form>
+    {% endblock %}
+
+{% block nav %}
+        <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Yeni Eklenen Araçlar</a></li>
+        <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Popüler Araçlar</a></li>
+        <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> İletişim</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Çıkış Yap</a></li>
+{% endblock %}
+      </ul>
+    </div>
+
+
+  </div>
+</nav>
+
+
+{% block body %}
+<div class="container">
+
+</div>
+{% endblock %}
+</body>
+</html>
